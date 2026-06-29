@@ -228,6 +228,25 @@ section{padding:88px 0;position:relative}
 .svc-mini .sm b{display:block;font-size:9.5px;margin-top:5px}
 .s-tabasul .cta-wa{margin-top:13px;background:#0a8d8d;color:#fff;text-align:center;border-radius:10px;padding:9px;font-size:11px;font-weight:600}
 
+/* site 4 — LINK SCANNER (tool) */
+.s-scanner{background:radial-gradient(120% 90% at 85% -10%,rgba(232,194,106,.10),transparent 55%),#070b14;color:#EAF0FA}
+.s-scanner .m-logo span{color:#E8C26A}
+.s-scanner .m-h1{color:#fff;margin-bottom:13px}
+.scan-eyebrow{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:9.5px;color:#E8C26A;background:rgba(232,194,106,.12);border:1px solid rgba(232,194,106,.28);padding:4px 11px;border-radius:20px;margin-bottom:12px}
+.scan-eyebrow i{width:6px;height:6px;border-radius:50%;background:#E8C26A;animation:pulse 2s infinite}
+.scan-input{display:flex;gap:7px;margin-bottom:13px}
+.scan-input .su{flex:1;font-family:var(--mono);font-size:10px;color:#9AA8C2;background:#0c1322;border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:9px 11px;text-align:left;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.scan-input .sb{font-size:10.5px;font-weight:700;color:#0c1322;background:#E8C26A;border-radius:10px;padding:9px 15px;display:flex;align-items:center}
+.scan-card{background:#0a111e;border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:12px}
+.scan-score{display:flex;align-items:center;gap:11px;margin-bottom:11px}
+.scan-score .ring{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-family:var(--dis);font-size:16px;font-weight:700;color:#4ADE80;border:3px solid rgba(74,222,128,.22);border-top-color:#4ADE80}
+.scan-score b{font-size:13px;display:block}.scan-score span{font-size:9.5px;color:#9AA8C2}
+.scan-cells{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.scan-cells .sc{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:7px 9px}
+.scan-cells .sc span{font-size:9px;color:#5E6E8C;display:block}
+.scan-cells .sc b{font-size:10.5px;color:#4ADE80}
+.scan-foot{font-family:var(--mono);font-size:9px;color:#5E6E8C;text-align:center;margin-top:11px}
+
 /* showcase tabs */
 .show-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
 .show-tabs button{font-family:var(--mono);font-size:11px;color:var(--muted);background:var(--glass);
@@ -500,6 +519,33 @@ a,button{-webkit-tap-highlight-color:transparent}
                 <div class="cta-wa">اطلب الآن عبر واتساب 💬</div>
               </div>
 
+              <!-- SITE 4 — LINK SCANNER (interactive tool) -->
+              <div class="site s-scanner" dir="rtl">
+                <div class="m-nav">
+                  <div class="m-logo">🔍 فاحص الروابط<span> · أداة</span></div>
+                  <div class="m-links"><span>محلي</span><span>آمن</span></div>
+                </div>
+                <div class="scan-eyebrow"><i></i> أداة أمنية · تشتغل فوراً</div>
+                <div class="m-h1">افحص أمان أي رابط</div>
+                <div class="scan-input">
+                  <span class="su">https://example.com/login</span>
+                  <span class="sb">افحص</span>
+                </div>
+                <div class="scan-card">
+                  <div class="scan-score">
+                    <div class="ring">92</div>
+                    <div><b style="color:#4ADE80">رابط آمن</b><span>لا مؤشرات تصيّد</span></div>
+                  </div>
+                  <div class="scan-cells">
+                    <div class="sc"><span>البروتوكول</span><b>HTTPS ✓</b></div>
+                    <div class="sc"><span>الدومين</span><b>موثوق ✓</b></div>
+                    <div class="sc"><span>نمط تصيّد</span><b>غير مكتشف ✓</b></div>
+                    <div class="sc"><span>VirusTotal</span><b>0/72 ✓</b></div>
+                  </div>
+                </div>
+                <div class="scan-foot">🔒 التحليل يصير محليًا في متصفحك</div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -694,6 +740,13 @@ const PROJECTS = [
     short:'موقع مكتب استقدام معتمد من مساند بهوية نظيفة.',
     long:'موقع لمكتب "التباسل" للاستقدام في القصيم — معتمد من منصة "مساند": عرض خدمات الاستقدام المنزلي والمهني، إبراز نقاط الثقة والاعتماد، وربط مباشر بالواتساب لطلب الخدمة بسهولة.',
     feats:['هوية نظيفة','معتمد مساند','تواصل واتساب','عرض خدمات','استجابة كاملة']
+  },
+  {
+    key:'scanner', icon:'🔍', color:'232,194,106', dom:'rakanstack.github.io/link-scanner',
+    url:'link-scanner.html', cta:'جرّب الأداة ↗', title:'فاحص الروابط الأمني',
+    short:'أداة تفاعلية تحلّل أمان أي رابط فورًا داخل المتصفح.',
+    long:'أداة أمنية من تطويري: تلصق أي رابط فتحلّله لحظيًا — كشف أنماط التصيّد، التحقق من البروتوكول والدومين، وتقرير أمان واضح بدرجة خطورة. تشتغل محليًا في متصفحك مع خيار ربط VirusTotal لفحص الرابط ضد أكثر من ٧٠ محرك مكافحة فيروسات.',
+    feats:['JavaScript','تحليل محلي','كشف تصيّد','تكامل VirusTotal','جرّبها مباشرة']
   }
 ];
 
@@ -704,8 +757,8 @@ const tabsBox = document.getElementById('show-tabs');
 const N = PROJECTS.length;
 let idx = 0, timer;
 
-const TAB_COLORS = {wathaq:'#2DD4FF', arabi:'#34E27A', tabasul:'#C9AE7C'};
-const TAB_NAMES  = {wathaq:'وثاق', arabi:'النادي العربي', tabasul:'التباسل'};
+const TAB_COLORS = {wathaq:'#2DD4FF', arabi:'#34E27A', tabasul:'#C9AE7C', scanner:'#E8C26A'};
+const TAB_NAMES  = {wathaq:'وثاق', arabi:'النادي العربي', tabasul:'التباسل', scanner:'فاحص الروابط'};
 
 PROJECTS.forEach((p,i)=>{
   const b=document.createElement('button');
@@ -761,7 +814,7 @@ function openModal(i){
     <p>${p.long}</p>
     <div class="feats">${p.feats.map(f=>`<span>${f}</span>`).join('')}</div>
     <div class="m-actions">
-      <a href="${p.url}" target="_blank" rel="noopener" class="btn btn-main">زيارة الموقع ↗</a>
+      <a href="${p.url}" target="_blank" rel="noopener" class="btn btn-main">${p.cta||'زيارة الموقع ↗'}</a>
       <a href="#start" class="btn btn-ghost" onclick="closeModal()">أبي شي مشابه</a>
     </div>`;
   modalBg.classList.add('show');
