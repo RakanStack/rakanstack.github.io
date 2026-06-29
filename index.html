@@ -2,9 +2,50 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>RAKAN.DEV — أبني تجارب رقمية فخمة</title>
-<meta name="description" content="ركان عبدالعزيز — مطوّر مواقع وتطبيقات ومتخصص أمن سيبراني. أصمّم وأبني تجارب رقمية فخمة وآمنة." />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#05080F" />
+
+<!-- Primary SEO -->
+<title>RAKANSTACK — راكان عبدالعزيز · مطوّر مواقع وتطبيقات وأمن سيبراني</title>
+<meta name="description" content="راكان عبدالعزيز (RAKANSTACK) — مطوّر مواقع وتطبيقات ومتخصص أمن سيبراني في السعودية. أصمّم وأبني تجارب رقمية فخمة وسريعة وآمنة من الفكرة حتى النشر." />
+<meta name="keywords" content="راكان عبدالعزيز, rakanstack, مطوّر مواقع, تطبيقات جوال, Flutter, أمن سيبراني, تصميم مواقع, السعودية, ERP" />
+<meta name="author" content="راكان عبدالعزيز" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<link rel="canonical" href="https://rakanstack.github.io/" />
+
+<!-- Open Graph (مشاركة واتساب / تويتر / لينكدإن) -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="RAKANSTACK" />
+<meta property="og:title" content="RAKANSTACK — راكان عبدالعزيز · مواقع وتطبيقات وأمن سيبراني" />
+<meta property="og:description" content="أصمّم وأبني تجارب رقمية فخمة وسريعة وآمنة — من الفكرة حتى النشر." />
+<meta property="og:url" content="https://rakanstack.github.io/" />
+<meta property="og:locale" content="ar_AR" />
+<meta property="og:image" content="https://rakanstack.github.io/og-cover.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="RAKANSTACK — راكان عبدالعزيز" />
+<meta name="twitter:description" content="مطوّر مواقع وتطبيقات ومتخصص أمن سيبراني. تجارب رقمية فخمة وآمنة." />
+<meta name="twitter:image" content="https://rakanstack.github.io/og-cover.png" />
+
+<!-- Structured data: Person -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "راكان عبدالعزيز",
+  "alternateName": "RAKANSTACK",
+  "url": "https://rakanstack.github.io/",
+  "jobTitle": "مطوّر مواقع وتطبيقات · متخصص أمن سيبراني",
+  "email": "rakan.abdulaziz91@gmail.com",
+  "sameAs": [
+    "https://www.linkedin.com/in/rakan-alajmi-034781306"
+  ]
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
@@ -260,6 +301,11 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='ht
 footer{border-top:1px solid var(--line);padding:46px 0;position:relative;z-index:3}
 .foot-in{max-width:var(--maxw);margin-inline:auto;padding-inline:26px;display:flex;justify-content:space-between;align-items:flex-start;gap:26px;flex-wrap:wrap}
 .foot-copy{font-family:var(--mono);font-size:12px;color:var(--faint);margin-top:10px}
+.foot-cta{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.linkedin-btn{display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:600;color:var(--text);
+  background:var(--glass);border:1px solid var(--line2);padding:12px 20px;border-radius:13px;transition:.22s}
+.linkedin-btn svg{color:#0a66c2;transition:.22s}
+.linkedin-btn:hover{border-color:#0a66c2;color:#0a66c2;transform:translateY(-2px)}
 .socials{display:flex;gap:11px}
 .socials a{width:46px;height:46px;border-radius:13px;border:1px solid var(--line2);display:grid;place-items:center;
   color:var(--muted);transition:.2s;background:var(--glass);font-size:17px}
@@ -288,22 +334,48 @@ footer{border-top:1px solid var(--line);padding:46px 0;position:relative;z-index
 
 /* ---------- responsive ---------- */
 @media(max-width:900px){
-  .hero{grid-template-columns:1fr;text-align:center;padding-top:54px;gap:40px}
+  section{padding:60px 0}
+  .hero{grid-template-columns:1fr;text-align:center;padding-top:48px;gap:38px}
   .hero .badge,.btn-row,.hero-stats{justify-content:center}
   .hero .lead{margin-inline:auto}
   .hero-copy{order:2}.show{order:1}
+  .hero-stats{flex-wrap:wrap;gap:22px 30px}
+  .btn-row .btn{flex:1 1 auto;justify-content:center}
   .svc-grid{grid-template-columns:1fr}
   .proj-grid{grid-template-columns:1fr}
   .form-grid{grid-template-columns:1fr}
+  .form-wrap{padding:30px 22px}
   .nav-links{display:none;position:absolute;top:100%;inset-inline:0;flex-direction:column;
     background:rgba(5,8,15,.98);border-bottom:1px solid var(--line2);padding:14px;gap:4px}
   .nav-links.open{display:flex}
-  .nav-links a{padding:13px 15px}
+  .nav-links a{padding:14px 15px}
+  .nav-cta{text-align:center}
   .burger{display:block}
   .foot-in{flex-direction:column;align-items:center;text-align:center}
+  .foot-cta{justify-content:center;width:100%}
+  .linkedin-btn,.foot-cta .btn{flex:1 1 auto;justify-content:center}
   .b-view{height:380px}
 }
-@media(max-width:420px){.b-view{height:360px}.site{padding:16px}.m-h1{font-size:20px}}
+@media(max-width:560px){
+  .wrap{padding-inline:18px}
+  section{padding:52px 0}
+  .hero h1{font-size:clamp(30px,8vw,40px)}
+  .hero-stats{gap:18px}
+  .hero-stats .s b{font-size:22px}
+  .show-tabs button{flex:1 1 auto;text-align:center}
+  .modal{padding:26px 20px}
+  .foot-in{padding-inline:18px}
+}
+@media(max-width:420px){
+  .b-view{height:360px}.site{padding:16px}.m-h1{font-size:20px}
+  .svc-mini{grid-template-columns:1fr 1fr 1fr;gap:6px}
+  .console{padding:10px}
+}
+/* iOS safe-area + remove tap highlight */
+@supports(padding:max(0px)){
+  nav .nav-in,.foot-in{padding-inline:max(26px,env(safe-area-inset-left))}
+}
+a,button{-webkit-tap-highlight-color:transparent}
 
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important;scroll-behavior:auto}
@@ -322,7 +394,7 @@ footer{border-top:1px solid var(--line);padding:46px 0;position:relative;z-index
 <!-- NAV -->
 <nav>
   <div class="nav-in">
-    <a href="#home" class="brand"><span class="mk"></span><b>RAKAN</b><span>.DEV</span></a>
+    <a href="#home" class="brand"><span class="mk"></span><b>RAKAN</b><span>STACK</span></a>
     <button class="burger" id="burger" aria-label="القائمة">☰</button>
     <div class="nav-links" id="nav-links">
       <a href="#home">الرئيسية</a>
@@ -340,7 +412,7 @@ footer{border-top:1px solid var(--line);padding:46px 0;position:relative;z-index
     <div class="hero-copy">
       <span class="badge"><span class="live"></span> متاح لمشاريع جديدة · 2026</span>
       <h1>أبني لك تجربة<br><span class="grad-txt">رقمية فخمة</span><br>وآمنة بالكامل</h1>
-      <p class="lead">أنا ركان — مطوّر مواقع وتطبيقات ومتخصص أمن سيبراني. أحوّل فكرتك إلى منتج رقمي يجمع بين التصميم الفخم والأداء العالي والحماية، من الفكرة حتى النشر.</p>
+      <p class="lead">أنا راكان — مطوّر مواقع وتطبيقات ومتخصص أمن سيبراني. أحوّل فكرتك إلى منتج رقمي يجمع بين التصميم الفخم والأداء العالي والحماية، من الفكرة حتى النشر.</p>
       <div class="hero-stats">
         <div class="s"><b data-count="15" data-suffix="+">0</b><span>مشروع منجز</span></div>
         <div class="s"><b data-count="100" data-suffix="%">0</b><span>رضا العملاء</span></div>
@@ -570,10 +642,14 @@ footer{border-top:1px solid var(--line);padding:46px 0;position:relative;z-index
 <footer>
   <div class="foot-in">
     <div>
-      <a href="#home" class="brand" style="font-size:21px"><span class="mk"></span><b>RAKAN</b><span>.DEV</span></a>
-      <div class="foot-copy">© <span id="yr"></span> ركان عبدالعزيز · صُنع بشغف ☕</div>
+      <a href="#home" class="brand" style="font-size:21px"><span class="mk"></span><b>RAKAN</b><span>STACK</span></a>
+      <div class="foot-copy">© <span id="yr"></span> راكان عبدالعزيز · صُنع بشغف ☕</div>
     </div>
     <div class="foot-cta">
+      <a href="https://www.linkedin.com/in/rakan-alajmi-034781306" target="_blank" rel="noopener" class="linkedin-btn" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+        <span>LinkedIn</span>
+      </a>
       <a href="#start" class="btn btn-main">ابدأ مشروعك ←</a>
     </div>
   </div>
