@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>مولّد وكاشف QR · RAKANSTACK</title>
+<meta name="description" content="أنشئ أكواد QR واقرأها بالكاميرا مجاناً داخل متصفحك — أداة من RAKANSTACK." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://rakanstack.github.io/qr-tool.html" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232DD4FF'/%3E%3Cstop offset='1' stop-color='%238B5CF6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='%2305080F'/%3E%3Crect x='14' y='14' width='72' height='72' rx='18' fill='url(%23g)'/%3E%3Ctext x='50' y='69' font-family='Arial,sans-serif' font-size='54' font-weight='700' text-anchor='middle' fill='%2305080F'%3ER%3C/text%3E%3C/svg%3E" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="مولّد وكاشف QR · RAKANSTACK" />
+<meta property="og:description" content="أنشئ أكواد QR واقرأها بالكاميرا مجاناً داخل متصفحك — أداة من RAKANSTACK." />
+<meta property="og:url" content="https://rakanstack.github.io/qr-tool.html" />
+<meta property="og:image" content="https://rakanstack.github.io/og-cover.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://rakanstack.github.io/og-cover.png" />
+
+<meta name="description" content="مولّد رموز QR وكاشف الروابط الخبيثة قبل المسح — من راكان عبدالعزيز." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js"></script>
+<style>
+  :root{
+    --bg:#05080F;--bg-2:#0A1020;--panel:#0E1626;--panel-2:#111B30;
+    --line:rgba(255,255,255,0.08);--line-strong:rgba(255,255,255,0.14);
+    --ink:#EAF0FA;--ink-soft:#9AA8C2;--ink-faint:#5E6E8C;
+    --gold:#E8C26A;--gold-soft:rgba(232,194,106,0.12);
+    --safe:#4ADE80;--safe-bg:rgba(74,222,128,0.10);--warn:#F5B544;--warn-bg:rgba(245,181,68,0.10);--danger:#F2566B;--danger-bg:rgba(242,86,107,0.10);
+    --mono:'IBM Plex Mono',monospace;--sans:'IBM Plex Sans Arabic',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:radial-gradient(1200px 700px at 85% -10%,rgba(232,194,106,0.07),transparent 60%),radial-gradient(900px 600px at 10% 110%,rgba(60,90,170,0.10),transparent 55%),var(--bg);
+    color:var(--ink);font-family:var(--sans);line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased;
+    padding:clamp(20px,5vw,56px) clamp(16px,5vw,40px) 80px;
+  }
+  .wrap{max-width:720px;margin:0 auto}
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:clamp(36px,6vw,60px)}
+  .brand{font-weight:700;letter-spacing:.5px;font-size:18px;color:var(--ink);text-decoration:none}
+  .brand b{color:var(--gold)}
+  .back{font-size:14px;color:var(--ink-soft);text-decoration:none;border:1px solid var(--line);padding:8px 14px;border-radius:100px;transition:.25s}
+  .back:hover{border-color:var(--gold);color:var(--gold)}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--gold);font-family:var(--mono);letter-spacing:1px;background:var(--gold-soft);border:1px solid rgba(232,194,106,0.25);padding:6px 14px;border-radius:100px;margin-bottom:22px}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(232,194,106,.5)}70%{box-shadow:0 0 0 8px rgba(232,194,106,0)}100%{box-shadow:0 0 0 0 rgba(232,194,106,0)}}
+  h1{font-size:clamp(30px,6vw,46px);font-weight:700;line-height:1.2;letter-spacing:-.5px;margin-bottom:16px}
+  h1 .g{color:var(--gold)}
+  .lede{color:var(--ink-soft);font-size:clamp(15px,2.5vw,17px);max-width:560px;margin-bottom:36px}
+  .scanbox{background:linear-gradient(180deg,var(--panel-2),var(--panel));border:1px solid var(--line-strong);border-radius:20px;padding:clamp(18px,3vw,26px);box-shadow:0 30px 60px -30px rgba(0,0,0,.7)}
+  .tabs{display:flex;gap:8px;margin-bottom:22px}
+  .tab{flex:1;background:var(--panel);border:1px solid var(--line);color:var(--ink-soft);padding:12px;border-radius:10px;cursor:pointer;font-family:var(--sans);font-size:15px;font-weight:600;transition:.2s}
+  .tab.active{background:var(--gold-soft);border-color:var(--gold);color:var(--gold)}
+  .field{display:flex;gap:10px;flex-wrap:wrap}
+  .field input{flex:1;min-width:200px;background:var(--bg-2);border:1px solid var(--line-strong);color:var(--ink);font-family:var(--mono);font-size:15px;padding:14px 16px;border-radius:12px;direction:ltr;text-align:left;transition:.25s}
+  .field input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-soft)}
+  .btn{background:var(--gold);color:#1A1304;border:none;font-family:var(--sans);font-weight:700;font-size:15px;padding:14px 24px;border-radius:12px;cursor:pointer;transition:.25s;white-space:nowrap}
+  .btn:hover{filter:brightness(1.06);transform:translateY(-1px)}
+  /* QR output */
+  .qrout{margin-top:24px;display:none;flex-direction:column;align-items:center;gap:16px}
+  .qrout.show{display:flex;animation:rise .4s ease}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  #qrcode{background:#fff;padding:16px;border-radius:16px;width:fit-content}
+  #qrcode img,#qrcode canvas{display:block}
+  .dlbtn{background:var(--gold-soft);border:1px solid rgba(232,194,106,.3);color:var(--gold);border-radius:10px;padding:10px 18px;cursor:pointer;font-family:var(--sans);font-size:14px;font-weight:600;transition:.2s}
+  .dlbtn:hover{background:var(--gold);color:#1A1304}
+  /* scanner */
+  .drop{margin-top:8px;border:2px dashed var(--line-strong);border-radius:16px;padding:36px 20px;text-align:center;cursor:pointer;transition:.25s;color:var(--ink-soft)}
+  .drop:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-soft)}
+  .drop .big{font-size:32px;margin-bottom:10px}
+  .drop .sm{font-size:13px;color:var(--ink-faint);margin-top:6px}
+  .verdict{display:flex;align-items:center;gap:14px;padding:18px;border-radius:14px;border:1px solid;margin-top:20px;display:none}
+  .verdict.show{display:flex;animation:rise .4s ease}
+  .verdict.safe{background:var(--safe-bg);border-color:rgba(74,222,128,.3)}
+  .verdict.warn{background:var(--warn-bg);border-color:rgba(245,181,68,.3)}
+  .verdict.danger{background:var(--danger-bg);border-color:rgba(242,86,107,.3)}
+  .vicon{font-size:30px;flex-shrink:0}
+  .vtext h3{font-size:17px;font-weight:700;margin-bottom:3px}
+  .verdict.safe h3{color:var(--safe)}.verdict.warn h3{color:var(--warn)}.verdict.danger h3{color:var(--danger)}
+  .vtext .url{font-size:13px;color:var(--ink-soft);font-family:var(--mono);direction:ltr;text-align:left;word-break:break-all}
+  .err{background:var(--danger-bg);border:1px solid rgba(242,86,107,.3);color:var(--danger);padding:13px 15px;border-radius:11px;font-size:14px;margin-top:16px;display:none}
+  .err.show{display:block}
+  .priv{font-size:12.5px;color:var(--ink-faint);margin-top:16px;text-align:center}
+  .hide{display:none}
+  footer{margin-top:50px;text-align:center;color:var(--ink-faint);font-size:13px}
+  footer b{color:var(--gold)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="brand" href="https://rakanstack.github.io/">RAKAN<b>STACK</b></a>
+    <a class="back" href="https://rakanstack.github.io/#work">‹ رجوع للموقع</a>
+  </div>
+
+  <div class="eyebrow"><span class="dot"></span> أداة أمنية · توليد ومسح</div>
+  <h1>مولّد وكاشف <span class="g">QR</span></h1>
+  <p class="lede">أنشئ رمز QR لأي رابط أو نص، أو افحص رمزاً مستلَماً قبل ما تثق فيه — أكشف الوجهة الحقيقية وأنبّهك لو كانت مشبوهة. كل شيء محلي في متصفحك.</p>
+
+  <div class="scanbox">
+    <div class="tabs">
+      <button class="tab active" data-mode="gen">⊞ إنشاء QR</button>
+      <button class="tab" data-mode="scan">🔍 فحص QR</button>
+    </div>
+
+    <!-- generate -->
+    <div id="genPanel">
+      <div class="field">
+        <input id="qrText" type="text" placeholder="https://example.com أو أي نص" autocomplete="off" />
+        <button class="btn" id="makeQr">أنشئ</button>
+      </div>
+      <div class="qrout" id="qrout">
+        <div id="qrcode"></div>
+        <button class="dlbtn" id="dlQr">⬇ تحميل الصورة</button>
+      </div>
+    </div>
+
+    <!-- scan -->
+    <div id="scanPanel" class="hide">
+      <div class="drop" id="drop">
+        <div class="big">📷</div>
+        <div>اسحب صورة رمز QR هنا أو اضغط للاختيار</div>
+        <div class="sm">يُفحص محلياً — لا تُرفع الصورة لأي مكان</div>
+        <input type="file" id="file" accept="image/*" class="hide" />
+      </div>
+      <div class="verdict" id="verdict">
+        <div class="vicon" id="vicon"></div>
+        <div class="vtext"><h3 id="vh"></h3><div class="url" id="vurl"></div></div>
+      </div>
+      <div class="err" id="err"></div>
+    </div>
+
+    <div class="priv">🔒 المعالجة بالكامل في المتصفح · لا اتصال بأي خادم</div>
+  </div>
+
+  <footer>صُنع بشغف بواسطة <b>راكان عبدالعزيز</b> · RAKANSTACK ☕</footer>
+</div>
+
+<script>
+const $=s=>document.querySelector(s);
+let mode='gen';
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active'); mode=t.dataset.mode;
+  $('#genPanel').classList.toggle('hide',mode!=='gen');
+  $('#scanPanel').classList.toggle('hide',mode!=='scan');
+}));
+
+// ---- generate ----
+let qr=null;
+function makeQr(){
+  const txt=$('#qrText').value.trim();
+  if(!txt) return;
+  $('#qrcode').innerHTML='';
+  qr=new QRCode($('#qrcode'),{text:txt,width:220,height:220,colorDark:'#05080F',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.H});
+  $('#qrout').classList.add('show');
+}
+$('#makeQr').addEventListener('click',makeQr);
+$('#qrText').addEventListener('keydown',e=>{if(e.key==='Enter')makeQr();});
+$('#dlQr').addEventListener('click',()=>{
+  const img=$('#qrcode').querySelector('img')||$('#qrcode').querySelector('canvas');
+  const url=img.tagName==='IMG'?img.src:img.toDataURL('image/png');
+  const a=document.createElement('a');a.href=url;a.download='qr-rakanstack.png';a.click();
+});
+
+// ---- scan ----
+const drop=$('#drop'),file=$('#file');
+drop.addEventListener('click',()=>file.click());
+drop.addEventListener('dragover',e=>{e.preventDefault();drop.style.borderColor='var(--gold)';});
+drop.addEventListener('dragleave',()=>drop.style.borderColor='');
+drop.addEventListener('drop',e=>{e.preventDefault();drop.style.borderColor='';if(e.dataTransfer.files[0])handleImg(e.dataTransfer.files[0]);});
+file.addEventListener('change',e=>{if(e.target.files[0])handleImg(e.target.files[0]);});
+
+function handleImg(f){
+  $('#err').classList.remove('show'); $('#verdict').classList.remove('show');
+  const img=new Image();
+  img.onload=()=>{
+    const c=document.createElement('canvas');c.width=img.width;c.height=img.height;
+    const ctx=c.getContext('2d');ctx.drawImage(img,0,0);
+    const data=ctx.getImageData(0,0,c.width,c.height);
+    const code=jsQR(data.data,c.width,c.height);
+    if(code) assess(code.data);
+    else showErr('ما قدرت أقرأ رمز QR من الصورة. جرّب صورة أوضح.');
+  };
+  img.onerror=()=>showErr('تعذّر تحميل الصورة.');
+  img.src=URL.createObjectURL(f);
+}
+
+const SUSPICIOUS_TLDS=['zip','mov','xyz','top','tk','ml','ga','cf','gq','click','link'];
+const SHORTENERS=['bit.ly','tinyurl.com','goo.gl','t.co','ow.ly','is.gd','cutt.ly','rb.gy','t.ly'];
+
+function assess(content){
+  let level='safe',title='محتوى آمن',risk=[];
+  const isUrl=/^https?:\/\//i.test(content)||/^[\w-]+\.[\w.]+/.test(content);
+  if(isUrl){
+    let u;try{u=new URL(/^https?:\/\//i.test(content)?content:'https://'+content);}catch(e){u=null;}
+    if(u){
+      const host=u.hostname.toLowerCase();
+      if(u.protocol==='http:'){risk.push('اتصال غير مشفّر (HTTP)');level='warn';}
+      if(SHORTENERS.includes(host)){risk.push('رابط مختصر — الوجهة مخفية');level='warn';}
+      if(SUSPICIOUS_TLDS.includes(host.split('.').pop())){risk.push('امتداد نطاق مشبوه');level='warn';}
+      if(host.includes('xn--')){risk.push('نطاق مموّه (Punycode)');level='danger';}
+      if(/^\d{1,3}(\.\d{1,3}){3}$/.test(host)){risk.push('عنوان IP مباشر');level='danger';}
+      if(u.href.split('://')[1].split('/')[0].includes('@')){risk.push('رمز @ مخادع في الرابط');level='danger';}
+    }
+  }
+  if(level==='danger')title='خطر — لا تفتح الرابط';
+  else if(level==='warn')title='انتبه قبل الفتح';
+  else title=isUrl?'الرابط يبدو سليماً':'محتوى نصي (ليس رابطاً)';
+
+  const icons={safe:'🛡️',warn:'⚠️',danger:'🚨'};
+  $('#vicon').textContent=icons[level];
+  $('#vh').textContent=title;
+  $('#vurl').textContent=content+(risk.length?'  ·  '+risk.join(' · '):'');
+  const v=$('#verdict');v.className='verdict show '+level;
+}
+
+function showErr(m){$('#err').textContent=m;$('#err').classList.add('show');}
+</script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>فاحص تسريب كلمات المرور · RAKANSTACK</title>
+<meta name="description" content="اكتشف إن كانت كلمة مرورك مسرّبة في اختراقات سابقة بأمان تام — أداة مجانية من RAKANSTACK." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://rakanstack.github.io/breach-checker.html" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232DD4FF'/%3E%3Cstop offset='1' stop-color='%238B5CF6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='%2305080F'/%3E%3Crect x='14' y='14' width='72' height='72' rx='18' fill='url(%23g)'/%3E%3Ctext x='50' y='69' font-family='Arial,sans-serif' font-size='54' font-weight='700' text-anchor='middle' fill='%2305080F'%3ER%3C/text%3E%3C/svg%3E" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="فاحص تسريب كلمات المرور · RAKANSTACK" />
+<meta property="og:description" content="اكتشف إن كانت كلمة مرورك مسرّبة في اختراقات سابقة بأمان تام — أداة مجانية من RAKANSTACK." />
+<meta property="og:url" content="https://rakanstack.github.io/breach-checker.html" />
+<meta property="og:image" content="https://rakanstack.github.io/og-cover.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://rakanstack.github.io/og-cover.png" />
+
+<meta name="description" content="تحقق إذا كانت كلمة مرورك ظهرت في تسريبات بيانات — بطريقة آمنة لا ترسل كلمتك أبداً. من راكان عبدالعزيز." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#05080F;--bg-2:#0A1020;--panel:#0E1626;--panel-2:#111B30;
+    --line:rgba(255,255,255,0.08);--line-strong:rgba(255,255,255,0.14);
+    --ink:#EAF0FA;--ink-soft:#9AA8C2;--ink-faint:#5E6E8C;
+    --gold:#E8C26A;--gold-soft:rgba(232,194,106,0.12);
+    --safe:#4ADE80;--safe-bg:rgba(74,222,128,0.10);--danger:#F2566B;--danger-bg:rgba(242,86,107,0.10);
+    --mono:'IBM Plex Mono',monospace;--sans:'IBM Plex Sans Arabic',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:radial-gradient(1200px 700px at 85% -10%,rgba(232,194,106,0.07),transparent 60%),radial-gradient(900px 600px at 10% 110%,rgba(60,90,170,0.10),transparent 55%),var(--bg);
+    color:var(--ink);font-family:var(--sans);line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased;
+    padding:clamp(20px,5vw,56px) clamp(16px,5vw,40px) 80px;
+  }
+  .wrap{max-width:720px;margin:0 auto}
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:clamp(36px,6vw,60px)}
+  .brand{font-weight:700;letter-spacing:.5px;font-size:18px;color:var(--ink);text-decoration:none}
+  .brand b{color:var(--gold)}
+  .back{font-size:14px;color:var(--ink-soft);text-decoration:none;border:1px solid var(--line);padding:8px 14px;border-radius:100px;transition:.25s}
+  .back:hover{border-color:var(--gold);color:var(--gold)}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--gold);font-family:var(--mono);letter-spacing:1px;background:var(--gold-soft);border:1px solid rgba(232,194,106,0.25);padding:6px 14px;border-radius:100px;margin-bottom:22px}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(232,194,106,.5)}70%{box-shadow:0 0 0 8px rgba(232,194,106,0)}100%{box-shadow:0 0 0 0 rgba(232,194,106,0)}}
+  h1{font-size:clamp(28px,5.5vw,44px);font-weight:700;line-height:1.2;letter-spacing:-.5px;margin-bottom:16px}
+  h1 .g{color:var(--gold)}
+  .lede{color:var(--ink-soft);font-size:clamp(15px,2.5vw,17px);max-width:580px;margin-bottom:24px}
+  .howbox{background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,.2);border-radius:14px;padding:14px 16px;margin-bottom:30px;font-size:13.5px;color:var(--ink-soft);display:flex;gap:10px}
+  .howbox b{color:var(--safe)}
+  .scanbox{background:linear-gradient(180deg,var(--panel-2),var(--panel));border:1px solid var(--line-strong);border-radius:20px;padding:clamp(18px,3vw,26px);box-shadow:0 30px 60px -30px rgba(0,0,0,.7)}
+  .pwfield{position:relative}
+  .pwfield input{width:100%;background:var(--bg-2);border:1px solid var(--line-strong);color:var(--ink);font-family:var(--mono);font-size:16px;padding:15px 18px;padding-left:48px;border-radius:12px;direction:ltr;text-align:left;transition:.25s}
+  .pwfield input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-soft)}
+  .eye{position:absolute;left:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--ink-faint);cursor:pointer;font-size:17px;padding:5px}
+  .eye:hover{color:var(--gold)}
+  .btn{width:100%;background:var(--gold);color:#1A1304;border:none;font-family:var(--sans);font-weight:700;font-size:16px;padding:15px;border-radius:12px;cursor:pointer;transition:.25s;margin-top:16px}
+  .btn:hover{filter:brightness(1.06);transform:translateY(-1px)}
+  .btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+  .spinner{display:inline-block;width:15px;height:15px;border:2px solid rgba(26,19,4,.3);border-top-color:#1A1304;border-radius:50%;animation:spin .7s linear infinite;vertical-align:-2px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .result{margin-top:24px;display:none}
+  .result.show{display:block;animation:rise .4s ease}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  .verdict{display:flex;align-items:center;gap:16px;padding:22px;border-radius:16px;border:1px solid}
+  .verdict.safe{background:var(--safe-bg);border-color:rgba(74,222,128,.3)}
+  .verdict.danger{background:var(--danger-bg);border-color:rgba(242,86,107,.3)}
+  .vicon{font-size:36px;flex-shrink:0}
+  .vtext h3{font-size:20px;font-weight:700;margin-bottom:4px}
+  .verdict.safe h3{color:var(--safe)}.verdict.danger h3{color:var(--danger)}
+  .vtext p{font-size:14px;color:var(--ink-soft)}
+  .vtext .count{font-family:var(--mono);color:var(--danger);font-weight:600}
+  .err{background:var(--danger-bg);border:1px solid rgba(242,86,107,.3);color:var(--danger);padding:13px 15px;border-radius:11px;font-size:14px;margin-top:16px;display:none}
+  .err.show{display:block}
+  .priv{font-size:12.5px;color:var(--ink-faint);margin-top:16px;text-align:center;line-height:1.6}
+  footer{margin-top:50px;text-align:center;color:var(--ink-faint);font-size:13px}
+  footer b{color:var(--gold)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="brand" href="https://rakanstack.github.io/">RAKAN<b>STACK</b></a>
+    <a class="back" href="https://rakanstack.github.io/#work">‹ رجوع للموقع</a>
+  </div>
+
+  <div class="eyebrow"><span class="dot"></span> أداة أمنية · قاعدة تسريبات عالمية</div>
+  <h1>فاحص <span class="g">تسريب</span> كلمات المرور</h1>
+  <p class="lede">تحقق إذا كانت كلمة مرورك ظهرت في أي تسريب بيانات معروف — من قاعدة فيها أكثر من ٨٥٠ مليون كلمة مرور مسرّبة.</p>
+
+  <div class="howbox">
+    <span>🔐</span>
+    <span><b>كيف نحميك:</b> كلمة مرورك لا تغادر جهازك أبداً. نحسب بصمتها (SHA-1) محلياً، ونرسل أول ٥ خانات فقط منها للبحث (تقنية k-anonymity). الخادم لا يعرف كلمتك ولا بصمتها الكاملة.</span>
+  </div>
+
+  <div class="scanbox">
+    <div class="pwfield">
+      <input id="pw" type="password" placeholder="اكتب كلمة المرور للفحص" autocomplete="off" spellcheck="false" />
+      <button class="eye" id="eye" type="button">👁</button>
+    </div>
+    <button class="btn" id="check">افحص الآن</button>
+
+    <div class="err" id="err"></div>
+
+    <div class="result" id="result">
+      <div class="verdict" id="verdict">
+        <div class="vicon" id="vicon"></div>
+        <div class="vtext"><h3 id="vh"></h3><p id="vp"></p></div>
+      </div>
+    </div>
+
+    <div class="priv">🔒 يستخدم Have I Been Pwned (Pwned Passwords)<br>كلمتك تُهشّ محلياً · يُرسل ٥ أحرف فقط من البصمة</div>
+  </div>
+
+  <footer>صُنع بشغف بواسطة <b>راكان عبدالعزيز</b> · RAKANSTACK ☕</footer>
+</div>
+
+<script>
+const $=s=>document.querySelector(s);
+const pw=$('#pw');
+
+$('#eye').addEventListener('click',()=>{
+  const show=pw.type==='password';pw.type=show?'text':'password';$('#eye').textContent=show?'🙈':'👁';
+});
+pw.addEventListener('keydown',e=>{if(e.key==='Enter')check();});
+$('#check').addEventListener('click',check);
+
+async function sha1(str){
+  const buf=await crypto.subtle.digest('SHA-1',new TextEncoder().encode(str));
+  return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('').toUpperCase();
+}
+
+async function check(){
+  const val=pw.value;
+  $('#err').classList.remove('show');$('#result').classList.remove('show');
+  if(!val){showErr('اكتب كلمة المرور أولاً.');return;}
+  const btn=$('#check');btn.disabled=true;btn.innerHTML='<span class="spinner"></span> جاري الفحص';
+  try{
+    const hash=await sha1(val);
+    const prefix=hash.slice(0,5),suffix=hash.slice(5);
+    const res=await fetch('https://api.pwnedpasswords.com/range/'+prefix,{headers:{'Add-Padding':'true'}});
+    if(!res.ok)throw new Error('connection');
+    const text=await res.text();
+    let count=0;
+    for(const line of text.split('\n')){
+      const [s,c]=line.trim().split(':');
+      if(s===suffix){count=parseInt(c);break;}
+    }
+    render(count);
+  }catch(e){
+    showErr('تعذّر الاتصال بقاعدة البيانات. تأكد من الإنترنت وحاول مرة ثانية.');
+  }finally{
+    btn.disabled=false;btn.textContent='افحص الآن';
+  }
+}
+
+function render(count){
+  const v=$('#verdict');
+  if(count>0){
+    v.className='verdict danger';
+    $('#vicon').textContent='🚨';
+    $('#vh').textContent='كلمة مرورك مسرّبة!';
+    $('#vp').innerHTML='ظهرت هذه الكلمة <span class="count">'+count.toLocaleString('en')+'</span> مرة في تسريبات معروفة. غيّرها فوراً في أي حساب تستخدمها فيه، ولا تستخدمها مرة أخرى.';
+  }else{
+    v.className='verdict safe';
+    $('#vicon').textContent='✅';
+    $('#vh').textContent='لم تظهر في أي تسريب';
+    $('#vp').textContent='كلمة مرورك غير موجودة في قاعدة التسريبات المعروفة. هذا مؤشر جيد، لكن تأكد أنها قوية وفريدة لكل حساب.';
+  }
+  $('#result').classList.add('show');
+}
+
+function showErr(m){$('#err').textContent=m;$('#err').classList.add('show');}
+</script>
+</body>
+</html>

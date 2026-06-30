@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>محلّل هيدرات الأمان · RAKANSTACK</title>
+<meta name="description" content="افحص رؤوس الحماية الأمنية لأي موقع وقيّمها — أداة من RAKANSTACK." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://rakanstack.github.io/headers-analyzer.html" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232DD4FF'/%3E%3Cstop offset='1' stop-color='%238B5CF6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='%2305080F'/%3E%3Crect x='14' y='14' width='72' height='72' rx='18' fill='url(%23g)'/%3E%3Ctext x='50' y='69' font-family='Arial,sans-serif' font-size='54' font-weight='700' text-anchor='middle' fill='%2305080F'%3ER%3C/text%3E%3C/svg%3E" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="محلّل هيدرات الأمان · RAKANSTACK" />
+<meta property="og:description" content="افحص رؤوس الحماية الأمنية لأي موقع وقيّمها — أداة من RAKANSTACK." />
+<meta property="og:url" content="https://rakanstack.github.io/headers-analyzer.html" />
+<meta property="og:image" content="https://rakanstack.github.io/og-cover.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://rakanstack.github.io/og-cover.png" />
+
+<meta name="description" content="افحص رؤوس الأمان (Security Headers) لأي موقع واحصل على درجة من A إلى F — من راكان عبدالعزيز." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#05080F;--bg-2:#0A1020;--panel:#0E1626;--panel-2:#111B30;
+    --line:rgba(255,255,255,0.08);--line-strong:rgba(255,255,255,0.14);
+    --ink:#EAF0FA;--ink-soft:#9AA8C2;--ink-faint:#5E6E8C;
+    --gold:#E8C26A;--gold-soft:rgba(232,194,106,0.12);
+    --safe:#4ADE80;--safe-bg:rgba(74,222,128,0.10);--warn:#F5B544;--warn-bg:rgba(245,181,68,0.10);--danger:#F2566B;--danger-bg:rgba(242,86,107,0.10);
+    --mono:'IBM Plex Mono',monospace;--sans:'IBM Plex Sans Arabic',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:radial-gradient(1200px 700px at 85% -10%,rgba(232,194,106,0.07),transparent 60%),radial-gradient(900px 600px at 10% 110%,rgba(60,90,170,0.10),transparent 55%),var(--bg);
+    color:var(--ink);font-family:var(--sans);line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased;
+    padding:clamp(20px,5vw,56px) clamp(16px,5vw,40px) 80px;
+  }
+  .wrap{max-width:760px;margin:0 auto}
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:clamp(36px,6vw,60px)}
+  .brand{font-weight:700;letter-spacing:.5px;font-size:18px;color:var(--ink);text-decoration:none}
+  .brand b{color:var(--gold)}
+  .back{font-size:14px;color:var(--ink-soft);text-decoration:none;border:1px solid var(--line);padding:8px 14px;border-radius:100px;transition:.25s}
+  .back:hover{border-color:var(--gold);color:var(--gold)}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--gold);font-family:var(--mono);letter-spacing:1px;background:var(--gold-soft);border:1px solid rgba(232,194,106,0.25);padding:6px 14px;border-radius:100px;margin-bottom:22px}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(232,194,106,.5)}70%{box-shadow:0 0 0 8px rgba(232,194,106,0)}100%{box-shadow:0 0 0 0 rgba(232,194,106,0)}}
+  h1{font-size:clamp(28px,5.5vw,44px);font-weight:700;line-height:1.2;letter-spacing:-.5px;margin-bottom:16px}
+  h1 .g{color:var(--gold)}
+  .lede{color:var(--ink-soft);font-size:clamp(15px,2.5vw,17px);max-width:580px;margin-bottom:36px}
+  .scanbox{background:linear-gradient(180deg,var(--panel-2),var(--panel));border:1px solid var(--line-strong);border-radius:20px;padding:clamp(18px,3vw,26px);box-shadow:0 30px 60px -30px rgba(0,0,0,.7)}
+  .field{display:flex;gap:10px;flex-wrap:wrap}
+  .field input{flex:1;min-width:200px;background:var(--bg-2);border:1px solid var(--line-strong);color:var(--ink);font-family:var(--mono);font-size:15px;padding:15px 16px;border-radius:12px;direction:ltr;text-align:left;transition:.25s}
+  .field input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-soft)}
+  .btn{background:var(--gold);color:#1A1304;border:none;font-family:var(--sans);font-weight:700;font-size:15px;padding:15px 26px;border-radius:12px;cursor:pointer;transition:.25s;white-space:nowrap}
+  .btn:hover{filter:brightness(1.06);transform:translateY(-1px)}
+  .btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+  .spinner{display:inline-block;width:15px;height:15px;border:2px solid rgba(26,19,4,.3);border-top-color:#1A1304;border-radius:50%;animation:spin .7s linear infinite;vertical-align:-2px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .setup{background:rgba(245,181,68,0.07);border:1px solid rgba(245,181,68,.25);border-radius:12px;padding:13px 15px;margin-top:14px;font-size:12.5px;color:var(--ink-soft);line-height:1.6;display:none}
+  .setup.show{display:block}
+  .setup code{background:var(--bg-2);padding:1px 6px;border-radius:5px;font-size:12px;color:var(--gold)}
+  .results{margin-top:28px;display:none}
+  .results.show{display:block;animation:rise .5s ease}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+  .gradewrap{display:flex;align-items:center;gap:20px;padding:22px;border-radius:16px;border:1px solid var(--line-strong);background:var(--panel);margin-bottom:18px}
+  .grade{width:84px;height:84px;border-radius:18px;display:grid;place-items:center;font-size:42px;font-weight:700;font-family:var(--mono);flex-shrink:0}
+  .grade.a{background:var(--safe-bg);color:var(--safe)}
+  .grade.b{background:rgba(125,211,252,.12);color:#7DD3FC}
+  .grade.c{background:var(--warn-bg);color:var(--warn)}
+  .grade.f{background:var(--danger-bg);color:var(--danger)}
+  .gradeinfo h3{font-size:18px;font-weight:700;margin-bottom:3px}
+  .gradeinfo p{font-size:14px;color:var(--ink-soft);direction:ltr;text-align:left;font-family:var(--mono)}
+  .checks{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .checks .row{display:flex;align-items:flex-start;gap:12px;padding:15px 16px;border-bottom:1px solid var(--line)}
+  .checks .row:last-child{border-bottom:none}
+  .rmark{flex-shrink:0;width:24px;height:24px;border-radius:7px;display:grid;place-items:center;font-size:13px;font-weight:700;margin-top:1px}
+  .rmark.ok{background:var(--safe-bg);color:var(--safe)}.rmark.no{background:var(--danger-bg);color:var(--danger)}
+  .rtext{flex:1}
+  .rtext .rt{color:var(--ink);font-weight:600;font-family:var(--mono);font-size:13.5px;direction:ltr;text-align:left}
+  .rtext .rd{color:var(--ink-faint);font-size:12.5px;margin-top:3px}
+  .err{background:var(--danger-bg);border:1px solid rgba(242,86,107,.3);color:var(--danger);padding:14px 16px;border-radius:12px;font-size:14px;margin-top:16px;display:none}
+  .err.show{display:block}
+  .priv{font-size:12.5px;color:var(--ink-faint);margin-top:16px;text-align:center}
+  footer{margin-top:50px;text-align:center;color:var(--ink-faint);font-size:13px}
+  footer b{color:var(--gold)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="brand" href="https://rakanstack.github.io/">RAKAN<b>STACK</b></a>
+    <a class="back" href="https://rakanstack.github.io/#work">‹ رجوع للموقع</a>
+  </div>
+
+  <div class="eyebrow"><span class="dot"></span> أداة أمنية · فحص رؤوس HTTP</div>
+  <h1>محلّل هيدرات <span class="g">الأمان</span></h1>
+  <p class="lede">افحص رؤوس الأمان لأي موقع — هل مفعّل فيه CSP و HSTS وحماية النقر؟ احصل على درجة من A إلى F مع شرح كل ثغرة وكيف تصلحها.</p>
+
+  <div class="scanbox">
+    <div class="field">
+      <input id="url" type="text" placeholder="https://example.com" autocomplete="off" spellcheck="false" />
+      <button class="btn" id="go">افحص</button>
+    </div>
+    <div class="setup" id="setup">
+      ⚙️ <b>إعداد لمرة واحدة:</b> المتصفح لا يقدر يجيب هيدرات موقع خارجي بسبب CORS، فتحتاج backend بسيط مجاني. انشر الـ Worker المرفق على Cloudflare (مجاني تماماً)، وحط رابطه في المتغيّر <code>WORKER_URL</code> أعلى الكود. الكود جاهز في ملف <code>headers-worker.js</code>.
+    </div>
+
+    <div class="err" id="err"></div>
+
+    <div class="results" id="results"></div>
+
+    <div class="priv">🔒 يفحص الرؤوس فقط · لا يخزّن أي بيانات</div>
+  </div>
+
+  <footer>صُنع بشغف بواسطة <b>راكان عبدالعزيز</b> · RAKANSTACK ☕</footer>
+</div>
+
+<script>
+// ⬇⬇⬇ بعد نشر الـ Worker، حط رابطه هنا ⬇⬇⬇
+const WORKER_URL = ''; // مثال: 'https://headers.yourname.workers.dev'
+
+const $=s=>document.querySelector(s);
+const HEADERS=[
+  {key:'content-security-policy',name:'Content-Security-Policy',weight:25,desc:'يمنع حقن السكربتات وهجمات XSS بتحديد المصادر الموثوقة.'},
+  {key:'strict-transport-security',name:'Strict-Transport-Security',weight:20,desc:'يفرض HTTPS ويمنع هجمات اعتراض الاتصال.'},
+  {key:'x-frame-options',name:'X-Frame-Options',weight:15,desc:'يمنع تضمين الموقع في إطار خارجي (حماية من Clickjacking).'},
+  {key:'x-content-type-options',name:'X-Content-Type-Options',weight:15,desc:'يمنع المتصفح من تخمين نوع المحتوى (MIME sniffing).'},
+  {key:'referrer-policy',name:'Referrer-Policy',weight:15,desc:'يتحكم في معلومات الإحالة المرسلة للمواقع الأخرى.'},
+  {key:'permissions-policy',name:'Permissions-Policy',weight:10,desc:'يقيّد وصول الموقع للكاميرا والموقع والميكروفون.'}
+];
+
+if(!WORKER_URL) $('#setup').classList.add('show');
+
+$('#go').addEventListener('click',scan);
+$('#url').addEventListener('keydown',e=>{if(e.key==='Enter')scan();});
+
+async function scan(){
+  const raw=$('#url').value.trim();
+  $('#err').classList.remove('show');$('#results').classList.remove('show');
+  if(!raw){showErr('اكتب رابط الموقع أولاً.');return;}
+  if(!WORKER_URL){showErr('لم يتم إعداد الـ Worker بعد. راجع تعليمات الإعداد بالأعلى.');return;}
+  let url=raw;if(!/^https?:\/\//i.test(url))url='https://'+url;
+
+  const btn=$('#go');btn.disabled=true;btn.innerHTML='<span class="spinner"></span>';
+  try{
+    const res=await fetch(WORKER_URL+'?url='+encodeURIComponent(url));
+    if(!res.ok)throw new Error('worker');
+    const data=await res.json();
+    if(data.error)throw new Error(data.error);
+    render(url,data.headers||{});
+  }catch(e){
+    showErr('تعذّر فحص الموقع. تأكد من الرابط ومن إعداد الـ Worker.');
+  }finally{
+    btn.disabled=false;btn.textContent='افحص';
+  }
+}
+
+function render(url,headers){
+  let score=0,total=0;
+  const rows=HEADERS.map(h=>{
+    total+=h.weight;
+    const present=Object.keys(headers).some(k=>k.toLowerCase()===h.key);
+    if(present)score+=h.weight;
+    const mark=present?['ok','✓']:['no','✕'];
+    return `<div class="row"><span class="rmark ${mark[0]}">${mark[1]}</span><span class="rtext"><span class="rt">${h.name}</span><span class="rd">${esc(h.desc)}</span></span></div>`;
+  }).join('');
+
+  const pct=Math.round(score/total*100);
+  let g,gc,gt;
+  if(pct>=90){g='A';gc='a';gt='ممتاز — حماية قوية';}
+  else if(pct>=70){g='B';gc='b';gt='جيد — مع بعض النواقص';}
+  else if(pct>=45){g='C';gc='c';gt='متوسط — يحتاج تحسين';}
+  else{g='F';gc='f';gt='ضعيف — ثغرات مهمة';}
+
+  $('#results').innerHTML=`
+    <div class="gradewrap">
+      <div class="grade ${gc}">${g}</div>
+      <div class="gradeinfo"><h3>${gt}</h3><p>${esc(url)} · ${pct}%</p></div>
+    </div>
+    <div class="checks">${rows}</div>`;
+  $('#results').classList.add('show');
+}
+
+function showErr(m){$('#err').textContent=m;$('#err').classList.add('show');}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+</script>
+</body>
+</html>
