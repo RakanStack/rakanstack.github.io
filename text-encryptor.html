@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>تشفير النصوص · RAKANSTACK</title>
+<meta name="description" content="شفّر وفكّ تشفير نصوصك بسرية داخل متصفحك مجاناً — أداة من RAKANSTACK." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://rakanstack.github.io/text-encryptor.html" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%232DD4FF'/%3E%3Cstop offset='1' stop-color='%238B5CF6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='24' fill='%2305080F'/%3E%3Crect x='14' y='14' width='72' height='72' rx='18' fill='url(%23g)'/%3E%3Ctext x='50' y='69' font-family='Arial,sans-serif' font-size='54' font-weight='700' text-anchor='middle' fill='%2305080F'%3ER%3C/text%3E%3C/svg%3E" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="تشفير النصوص · RAKANSTACK" />
+<meta property="og:description" content="شفّر وفكّ تشفير نصوصك بسرية داخل متصفحك مجاناً — أداة من RAKANSTACK." />
+<meta property="og:url" content="https://rakanstack.github.io/text-encryptor.html" />
+<meta property="og:image" content="https://rakanstack.github.io/og-cover.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://rakanstack.github.io/og-cover.png" />
+
+<meta name="description" content="أداة تشفير وفك تشفير النصوص بمعيار AES-256 من راكان عبدالعزيز — تعمل بالكامل في متصفحك." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#05080F;--bg-2:#0A1020;--panel:#0E1626;--panel-2:#111B30;
+    --line:rgba(255,255,255,0.08);--line-strong:rgba(255,255,255,0.14);
+    --ink:#EAF0FA;--ink-soft:#9AA8C2;--ink-faint:#5E6E8C;
+    --gold:#E8C26A;--gold-soft:rgba(232,194,106,0.12);
+    --safe:#4ADE80;--danger:#F2566B;--mono:'IBM Plex Mono',monospace;--sans:'IBM Plex Sans Arabic',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:radial-gradient(1200px 700px at 85% -10%,rgba(232,194,106,0.07),transparent 60%),radial-gradient(900px 600px at 10% 110%,rgba(60,90,170,0.10),transparent 55%),var(--bg);
+    color:var(--ink);font-family:var(--sans);line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased;
+    padding:clamp(20px,5vw,56px) clamp(16px,5vw,40px) 80px;
+  }
+  .wrap{max-width:720px;margin:0 auto}
+  .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:clamp(36px,6vw,60px)}
+  .brand{font-weight:700;letter-spacing:.5px;font-size:18px;color:var(--ink);text-decoration:none}
+  .brand b{color:var(--gold)}
+  .back{font-size:14px;color:var(--ink-soft);text-decoration:none;border:1px solid var(--line);padding:8px 14px;border-radius:100px;transition:.25s}
+  .back:hover{border-color:var(--gold);color:var(--gold)}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--gold);font-family:var(--mono);letter-spacing:1px;background:var(--gold-soft);border:1px solid rgba(232,194,106,0.25);padding:6px 14px;border-radius:100px;margin-bottom:22px}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(232,194,106,.5)}70%{box-shadow:0 0 0 8px rgba(232,194,106,0)}100%{box-shadow:0 0 0 0 rgba(232,194,106,0)}}
+  h1{font-size:clamp(30px,6vw,46px);font-weight:700;line-height:1.2;letter-spacing:-.5px;margin-bottom:16px}
+  h1 .g{color:var(--gold)}
+  .lede{color:var(--ink-soft);font-size:clamp(15px,2.5vw,17px);max-width:560px;margin-bottom:36px}
+  .scanbox{background:linear-gradient(180deg,var(--panel-2),var(--panel));border:1px solid var(--line-strong);border-radius:20px;padding:clamp(18px,3vw,26px);box-shadow:0 30px 60px -30px rgba(0,0,0,.7)}
+  .tabs{display:flex;gap:8px;margin-bottom:22px}
+  .tab{flex:1;background:var(--panel);border:1px solid var(--line);color:var(--ink-soft);padding:12px;border-radius:10px;cursor:pointer;font-family:var(--sans);font-size:15px;font-weight:600;transition:.2s}
+  .tab.active{background:var(--gold-soft);border-color:var(--gold);color:var(--gold)}
+  label.fl{display:block;font-size:13px;color:var(--ink-soft);margin-bottom:8px;font-weight:500}
+  textarea,.kin{width:100%;background:var(--bg-2);border:1px solid var(--line-strong);color:var(--ink);font-size:15px;padding:14px;border-radius:12px;transition:.25s;font-family:var(--sans);resize:vertical}
+  textarea{min-height:110px;line-height:1.7}
+  textarea.mono{font-family:var(--mono);direction:ltr;text-align:left;font-size:13px}
+  textarea:focus,.kin:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-soft)}
+  .kfield{position:relative;margin:18px 0}
+  .kin{font-family:var(--mono);direction:ltr;text-align:left;padding-left:48px}
+  .eye{position:absolute;left:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--ink-faint);cursor:pointer;font-size:17px;padding:5px}
+  .eye:hover{color:var(--gold)}
+  .btn{width:100%;background:var(--gold);color:#1A1304;border:none;font-family:var(--sans);font-weight:700;font-size:16px;padding:15px;border-radius:12px;cursor:pointer;transition:.25s;margin-top:6px}
+  .btn:hover{filter:brightness(1.06);transform:translateY(-1px)}
+  .result{margin-top:20px;display:none}
+  .result.show{display:block;animation:rise .4s ease}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  .rhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+  .rhead span{font-size:13px;color:var(--ink-soft)}
+  .rbtns{display:flex;gap:8px}
+  .mini{background:var(--gold-soft);border:1px solid rgba(232,194,106,.3);color:var(--gold);border-radius:8px;padding:6px 12px;cursor:pointer;font-size:12.5px;font-family:var(--sans);transition:.2s}
+  .mini:hover{background:var(--gold);color:#1A1304}
+  .mini.done{background:var(--safe);border-color:var(--safe);color:#05210F}
+  .err{background:rgba(242,86,107,0.1);border:1px solid rgba(242,86,107,.3);color:var(--danger);padding:13px 15px;border-radius:11px;font-size:14px;margin-top:16px;display:none}
+  .err.show{display:block}
+  .priv{font-size:12.5px;color:var(--ink-faint);margin-top:16px;text-align:center;line-height:1.6}
+  footer{margin-top:50px;text-align:center;color:var(--ink-faint);font-size:13px}
+  footer b{color:var(--gold)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="brand" href="https://rakanstack.github.io/">RAKAN<b>STACK</b></a>
+    <a class="back" href="https://rakanstack.github.io/#work">‹ رجوع للموقع</a>
+  </div>
+
+  <div class="eyebrow"><span class="dot"></span> أداة أمنية · تشفير AES-256</div>
+  <h1>تشفير <span class="g">النصوص</span></h1>
+  <p class="lede">شفّر أي رسالة بمعيار AES-256-GCM وشاركها برابط آمن — لا أحد يقرأها بدون كلمة السر. كل العمليات تتم داخل متصفحك عبر Web Crypto، ولا يُرسل النص ولا المفتاح لأي خادم.</p>
+
+  <div class="scanbox">
+    <div class="tabs">
+      <button class="tab active" data-mode="enc">🔒 تشفير</button>
+      <button class="tab" data-mode="dec">🔓 فك التشفير</button>
+    </div>
+
+    <label class="fl" id="inLabel">النص الذي تريد تشفيره</label>
+    <textarea id="input" placeholder="اكتب رسالتك السرية هنا…"></textarea>
+
+    <div class="kfield">
+      <input class="kin" id="pass" type="password" placeholder="كلمة السر (المفتاح المشترك)" autocomplete="off" />
+      <button class="eye" id="eye" type="button">👁</button>
+    </div>
+
+    <button class="btn" id="run">🔒 شفّر الآن</button>
+
+    <div class="err" id="err"></div>
+
+    <div class="result" id="result">
+      <div class="rhead">
+        <span id="outLabel">النص المشفّر</span>
+        <div class="rbtns">
+          <button class="mini" id="copyOut">⧉ نسخ</button>
+          <button class="mini" id="copyLink">🔗 نسخ رابط آمن</button>
+        </div>
+      </div>
+      <textarea id="output" class="mono" readonly></textarea>
+    </div>
+
+    <div class="priv">🔒 AES-256-GCM · اشتقاق مفتاح PBKDF2 (٢٠٠ ألف دورة)<br>لا اتصال بالإنترنت · النص والمفتاح لا يغادران جهازك</div>
+  </div>
+
+  <footer>صُنع بشغف بواسطة <b>راكان عبدالعزيز</b> · RAKANSTACK ☕</footer>
+</div>
+
+<script>
+const $ = s=>document.querySelector(s);
+let mode='enc';
+const enc=new TextEncoder(), dec=new TextDecoder();
+
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active'); mode=t.dataset.mode;
+  $('#inLabel').textContent = mode==='enc' ? 'النص الذي تريد تشفيره' : 'النص المشفّر (الصق هنا)';
+  $('#input').placeholder = mode==='enc' ? 'اكتب رسالتك السرية هنا…' : 'الصق النص المشفّر…';
+  $('#input').classList.toggle('mono', mode==='dec');
+  $('#run').textContent = mode==='enc' ? '🔒 شفّر الآن' : '🔓 فك التشفير';
+  $('#result').classList.remove('show'); $('#err').classList.remove('show');
+}));
+
+$('#eye').addEventListener('click',()=>{
+  const p=$('#pass'); const show=p.type==='password';
+  p.type=show?'text':'password'; $('#eye').textContent=show?'🙈':'👁';
+});
+
+function b64(buf){ return btoa(String.fromCharCode(...new Uint8Array(buf))); }
+function unb64(str){ return Uint8Array.from(atob(str),c=>c.charCodeAt(0)); }
+
+async function deriveKey(pass, salt){
+  const base = await crypto.subtle.importKey('raw', enc.encode(pass), 'PBKDF2', false, ['deriveKey']);
+  return crypto.subtle.deriveKey(
+    {name:'PBKDF2', salt, iterations:200000, hash:'SHA-256'},
+    base, {name:'AES-GCM', length:256}, false, ['encrypt','decrypt']
+  );
+}
+
+async function encrypt(text, pass){
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const key = await deriveKey(pass, salt);
+  const ct = await crypto.subtle.encrypt({name:'AES-GCM', iv}, key, enc.encode(text));
+  const combined = new Uint8Array(salt.length + iv.length + ct.byteLength);
+  combined.set(salt,0); combined.set(iv,16); combined.set(new Uint8Array(ct),28);
+  return b64(combined);
+}
+
+async function decrypt(payload, pass){
+  const data = unb64(payload.trim());
+  const salt = data.slice(0,16), iv = data.slice(16,28), ct = data.slice(28);
+  const key = await deriveKey(pass, salt);
+  const pt = await crypto.subtle.decrypt({name:'AES-GCM', iv}, key, ct);
+  return dec.decode(pt);
+}
+
+$('#run').addEventListener('click', async ()=>{
+  const text=$('#input').value, pass=$('#pass').value;
+  $('#err').classList.remove('show'); $('#result').classList.remove('show');
+  if(!text.trim()){ showErr('اكتب نصاً أولاً.'); return; }
+  if(!pass){ showErr('اكتب كلمة السر.'); return; }
+  try{
+    if(mode==='enc'){
+      const out = await encrypt(text, pass);
+      $('#outLabel').textContent='النص المشفّر';
+      $('#output').value = out;
+      $('#copyLink').style.display='inline-block';
+    }else{
+      const out = await decrypt(text, pass);
+      $('#outLabel').textContent='النص الأصلي';
+      $('#output').value = out;
+      $('#copyLink').style.display='none';
+    }
+    $('#result').classList.add('show');
+  }catch(e){
+    showErr(mode==='dec' ? 'فشل فك التشفير — كلمة السر خاطئة أو النص تالف.' : 'حدث خطأ أثناء التشفير.');
+  }
+});
+
+function showErr(m){ $('#err').textContent=m; $('#err').classList.add('show'); }
+
+$('#copyOut').addEventListener('click',()=>copyBtn($('#copyOut'), $('#output').value));
+$('#copyLink').addEventListener('click',()=>{
+  const link = location.origin + location.pathname + '#msg=' + encodeURIComponent($('#output').value);
+  copyBtn($('#copyLink'), link);
+});
+function copyBtn(btn, txt){
+  navigator.clipboard.writeText(txt).then(()=>{
+    const old=btn.textContent; btn.textContent='✓ تم'; btn.classList.add('done');
+    setTimeout(()=>{btn.textContent=old;btn.classList.remove('done');},1400);
+  });
+}
+
+// auto-load shared message from URL
+window.addEventListener('load',()=>{
+  const m = location.hash.match(/#msg=(.+)/);
+  if(m){
+    document.querySelector('.tab[data-mode="dec"]').click();
+    $('#input').value = decodeURIComponent(m[1]);
+    $('#pass').focus();
+  }
+});
+</script>
+</body>
+</html>

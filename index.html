@@ -229,6 +229,23 @@ section{padding:88px 0;position:relative}
 .svc-mini .sm b{display:block;font-size:9.5px;margin-top:5px}
 .s-tabasul .cta-wa{margin-top:13px;background:#0a8d8d;color:#fff;text-align:center;border-radius:10px;padding:9px;font-size:11px;font-weight:600}
 
+/* ---------- free tools ---------- */
+.tools-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:46px}
+.tool{position:relative;background:var(--glass);border:1px solid var(--line);border-radius:var(--r);
+  padding:24px;display:flex;flex-direction:column;gap:11px;transition:.25s;backdrop-filter:blur(6px);overflow:hidden}
+.tool::before{content:'';position:absolute;inset:0;padding:1px;border-radius:var(--r);
+  background:var(--grad);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:.3s}
+.tool:hover{transform:translateY(-5px);background:rgba(255,255,255,.04)}
+.tool:hover::before{opacity:1}
+.tool-top{display:flex;align-items:center;justify-content:space-between}
+.tool-ico{font-size:30px}
+.free-tag{font-family:var(--mono);font-size:10px;font-weight:700;color:#03121a;background:var(--gold);
+  padding:4px 10px;border-radius:20px;letter-spacing:.5px}
+.tool h3{font-size:17px;font-weight:700}
+.tool p{font-size:13px;color:var(--muted);flex:1;line-height:1.8}
+.tool-cta{font-size:13.5px;font-weight:700;color:var(--cyan);margin-top:4px}
+
 /* site 4 — LINK SCANNER (tool) */
 .s-scanner{background:radial-gradient(120% 90% at 85% -10%,rgba(232,194,106,.10),transparent 55%),#070b14;color:#EAF0FA}
 .s-scanner .m-logo span{color:#E8C26A}
@@ -365,6 +382,7 @@ footer{border-top:1px solid var(--line);padding:46px 0;position:relative;z-index
   .btn-row .btn{flex:1 1 auto;justify-content:center}
   .svc-grid{grid-template-columns:1fr}
   .proj-grid{grid-template-columns:1fr}
+  .tools-grid{grid-template-columns:1fr 1fr}
   .form-grid{grid-template-columns:1fr}
   .form-wrap{padding:30px 22px}
   .nav-links{display:none;position:absolute;top:100%;inset-inline:0;flex-direction:column;
@@ -380,6 +398,7 @@ footer{border-top:1px solid var(--line);padding:46px 0;position:relative;z-index
 }
 @media(max-width:560px){
   .wrap{padding-inline:18px}
+  .tools-grid{grid-template-columns:1fr}
   section{padding:52px 0}
   .hero h1{font-size:clamp(30px,8vw,40px)}
   .hero-stats{gap:18px}
@@ -421,6 +440,7 @@ a,button{-webkit-tap-highlight-color:transparent}
     <div class="nav-links" id="nav-links">
       <a href="#home">الرئيسية</a>
       <a href="#work">المشاريع</a>
+      <a href="#tools">أدوات</a>
       <a href="#services">الخدمات</a>
       <a href="#start" class="nav-cta">ابدأ مشروعك</a>
     </div>
@@ -520,33 +540,6 @@ a,button{-webkit-tap-highlight-color:transparent}
                 <div class="cta-wa">اطلب الآن عبر واتساب 💬</div>
               </div>
 
-              <!-- SITE 4 — LINK SCANNER (interactive tool) -->
-              <div class="site s-scanner" dir="rtl">
-                <div class="m-nav">
-                  <div class="m-logo">🔍 فاحص الروابط<span> · أداة</span></div>
-                  <div class="m-links"><span>محلي</span><span>آمن</span></div>
-                </div>
-                <div class="scan-eyebrow"><i></i> أداة أمنية · تشتغل فوراً</div>
-                <div class="m-h1">افحص أمان أي رابط</div>
-                <div class="scan-input">
-                  <span class="su">https://example.com/login</span>
-                  <span class="sb">افحص</span>
-                </div>
-                <div class="scan-card">
-                  <div class="scan-score">
-                    <div class="ring">92</div>
-                    <div><b style="color:#4ADE80">رابط آمن</b><span>لا مؤشرات تصيّد</span></div>
-                  </div>
-                  <div class="scan-cells">
-                    <div class="sc"><span>البروتوكول</span><b>HTTPS ✓</b></div>
-                    <div class="sc"><span>الدومين</span><b>موثوق ✓</b></div>
-                    <div class="sc"><span>نمط تصيّد</span><b>غير مكتشف ✓</b></div>
-                    <div class="sc"><span>VirusTotal</span><b>0/72 ✓</b></div>
-                  </div>
-                </div>
-                <div class="scan-foot">🔒 التحليل يصير محليًا في متصفحك</div>
-              </div>
-
             </div>
           </div>
         </div>
@@ -563,6 +556,46 @@ a,button{-webkit-tap-highlight-color:transparent}
     <h2 class="sec-title reveal">مشاريع شغّالة على الإنترنت</h2>
     <p class="sec-lead reveal">مواقع حقيقية صمّمتها وبنيتها — تشوفها حيّة في المحاكي فوق، واضغط أي مشروع لزيارته وتفاصيله.</p>
     <div class="proj-grid" id="proj-grid"></div>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- FREE TOOLS -->
+  <section id="tools">
+    <div class="reveal"><div class="eyebrow">جرّبها الآن · مجاناً</div></div>
+    <h2 class="sec-title reveal">أدوات مجانية <span class="grad-txt">من تطويري</span></h2>
+    <p class="sec-lead reveal">أدوات أمنية تشتغل مباشرة في متصفحك — بدون تسجيل، وبياناتك ما تطلع من جهازك. جرّبها وشوف مستوى الشغل.</p>
+    <div class="tools-grid">
+
+      <a href="link-scanner.html" target="_blank" rel="noopener" class="tool reveal">
+        <div class="tool-top"><div class="tool-ico" style="color:#2DD4FF">🔍</div><span class="free-tag">مجاني</span></div>
+        <h3>فاحص الروابط</h3>
+        <p>حلّل أمان أي رابط فورًا — كشف التصيّد وفحص البروتوكول والدومين مع تكامل VirusTotal.</p>
+        <span class="tool-cta">جرّب الآن ↗</span>
+      </a>
+
+      <a href="password-generator.html" target="_blank" rel="noopener" class="tool reveal">
+        <div class="tool-top"><div class="tool-ico" style="color:#34E27A">🔑</div><span class="free-tag">مجاني</span></div>
+        <h3>مولّد كلمات المرور</h3>
+        <p>أنشئ كلمات مرور قوية وعشوائية بطول وخيارات تختارها أنت، بضغطة زر.</p>
+        <span class="tool-cta">جرّب الآن ↗</span>
+      </a>
+
+      <a href="password-strength.html" target="_blank" rel="noopener" class="tool reveal">
+        <div class="tool-top"><div class="tool-ico" style="color:#C9AE7C">🛡️</div><span class="free-tag">مجاني</span></div>
+        <h3>فاحص قوة كلمة المرور</h3>
+        <p>اعرف مدى قوة كلمة مرورك ووقت كسرها المتوقّع، مع نصائح لتقويتها.</p>
+        <span class="tool-cta">جرّب الآن ↗</span>
+      </a>
+
+      <a href="text-encryptor.html" target="_blank" rel="noopener" class="tool reveal">
+        <div class="tool-top"><div class="tool-ico" style="color:#8B5CF6">🔐</div><span class="free-tag">مجاني</span></div>
+        <h3>تشفير النصوص</h3>
+        <p>شفّر وفكّ تشفير رسائلك ونصوصك بسرية تامة — كل العملية داخل متصفحك.</p>
+        <span class="tool-cta">جرّب الآن ↗</span>
+      </a>
+
+    </div>
   </section>
 
   <hr class="rule" />
@@ -741,13 +774,6 @@ const PROJECTS = [
     short:'موقع مكتب استقدام معتمد من مساند بهوية نظيفة.',
     long:'موقع لمكتب "التباسل" للاستقدام في القصيم — معتمد من منصة "مساند": عرض خدمات الاستقدام المنزلي والمهني، إبراز نقاط الثقة والاعتماد، وربط مباشر بالواتساب لطلب الخدمة بسهولة.',
     feats:['هوية نظيفة','معتمد مساند','تواصل واتساب','عرض خدمات','استجابة كاملة']
-  },
-  {
-    key:'scanner', icon:'🔍', color:'232,194,106', dom:'rakanstack.github.io/link-scanner',
-    url:'link-scanner.html', cta:'جرّب الأداة ↗', title:'فاحص الروابط الأمني',
-    short:'أداة تفاعلية تحلّل أمان أي رابط فورًا داخل المتصفح.',
-    long:'أداة أمنية من تطويري: تلصق أي رابط فتحلّله لحظيًا — كشف أنماط التصيّد، التحقق من البروتوكول والدومين، وتقرير أمان واضح بدرجة خطورة. تشتغل محليًا في متصفحك مع خيار ربط VirusTotal لفحص الرابط ضد أكثر من ٧٠ محرك مكافحة فيروسات.',
-    feats:['JavaScript','تحليل محلي','كشف تصيّد','تكامل VirusTotal','جرّبها مباشرة']
   }
 ];
 
@@ -758,8 +784,8 @@ const tabsBox = document.getElementById('show-tabs');
 const N = PROJECTS.length;
 let idx = 0, timer;
 
-const TAB_COLORS = {wathaq:'#2DD4FF', arabi:'#34E27A', tabasul:'#C9AE7C', scanner:'#E8C26A'};
-const TAB_NAMES  = {wathaq:'وثاق', arabi:'النادي العربي', tabasul:'التباسل', scanner:'فاحص الروابط'};
+const TAB_COLORS = {wathaq:'#2DD4FF', arabi:'#34E27A', tabasul:'#C9AE7C'};
+const TAB_NAMES  = {wathaq:'وثاق', arabi:'النادي العربي', tabasul:'التباسل'};
 
 PROJECTS.forEach((p,i)=>{
   const b=document.createElement('button');
